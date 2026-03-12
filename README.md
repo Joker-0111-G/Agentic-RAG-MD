@@ -59,17 +59,3 @@
 7. **返回结果：** Gin 将最终答案返回给前端，并异步将这次对话存入 MySQL。
 
 ------
-
-## 4. 简历上的高分写法（直接抄作业）
-
-> **Agentic RAG 个人 Markdown 智能知识库 (Golang)**
->
-> **技术栈：** Golang, Gin, GORM, MySQL, Redis, LLM Function Calling
->
-> **项目描述：** 独立设计开发的代理式检索增强生成（Agentic RAG）后端服务，支持解析本地 Markdown 笔记并提供具备复杂意图识别的对话问答能力。
->
-> **核心亮点：**
->
-> - **Agentic 架构落地：** 摒弃传统单向检索，基于大模型 Function Calling 实现了带有“自我规划”能力的 Agent 循环。动态路由查询意图，显著提升了跨文档搜索与时间维度查询的准确率。
-> - **后端 API 与数据建模：** 使用 Gin 构建高效 RESTful 接口；通过 MySQL + GORM 管理文档元数据与用户状态；设计了 `query_metadata` 等 Go 语言原生工具函数供 Agent 动态调度。
-> - **高性能会话与限流：** 引入 Redis 实现多轮对话上下文的毫秒级存取，并设计了基于滑动窗口的接口限流（Rate Limit）机制，保障系统稳定性。
