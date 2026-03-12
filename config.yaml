@@ -1,0 +1,18 @@
+server:
+  port: 8080
+  mode: "debug" # debug 或 release
+
+mysql:
+  dsn: "root:G20050111g@tcp(127.0.0.1:3306)/agentic_rag?charset=utf8mb4&parseTime=True&loc=Local"
+  max_idle_conns: 10
+  max_open_conns: 100
+
+redis:
+  addr: "127.0.0.1:6379"
+  password: ""
+  db: 0
+  pool_size: 10
+
+llm:
+  api_key: "sk-your-llm-api-key"
+  model: "gpt-4o"
