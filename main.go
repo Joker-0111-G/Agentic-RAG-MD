@@ -9,13 +9,13 @@ import (
 )
 
 func main() {
-	// 1. 初始化配置与数据库
+	//初始化配置与数据库
 	initialize.InitApp()
 
-	// 2. 挂载 Gin 路由
+	//Gin
 	r := router.SetupRouter()
 
-	// 3. 启动服务
+	//run
 	port := fmt.Sprintf(":%d", global.Config.Server.Port)
 	fmt.Printf(" Agentic RAG 知识库服务启动，监听端口 %s\n", port)
 	
