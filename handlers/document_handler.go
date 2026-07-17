@@ -74,6 +74,15 @@ func UploadDocumentHandler(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"message": "文档上传并解析成功", "data": doc})
 }
 
+func ListDocumentsHandler(c *gin.Context) {
+	var docs []models.Document
+	if err := global.DB.Order("created_at desc").Find(&docs).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "获取文档列表失败: " + err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"message": "获取成功", "data": docs})
+}
+
 func DeleteDocumentHandler(c *gin.Context) {
 	docID := c.Param("id")
 	var doc models.Document
