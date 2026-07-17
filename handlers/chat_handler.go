@@ -37,6 +37,30 @@ func GetSessionHistoryHandler(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"message": "获取成功", "data": history})
 }
 
+func DeleteSessionHandler(c *gin.Context) {
+	sessionID := c.Param("session_id")
+	if sessionID == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "session_id 不能为空"})
+		return
+	}
+
+	// 删除会话及其关联的历史记录
+	if err := global.DB.Where("session_id = ?", sessionID).Delete(&models.ChatHistory{}).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "删除会话历史失败: " + err.Error()})
+		return
+	}
+	if err := global.DB.Where("id = ?", sessionID).Delete(&models.ChatSession{}).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "删除会话失败: " + err.Error()})
+		return
+	}
+
+	// 清理 Redis 缓存
+	redisKey := "chat_context:" + sessionID
+	global.RedisClient.Del(global.Ctx, redisKey)
+
+	c.JSON(http.StatusOK, gin.H{"message": "会话已删除"})
+}
+
 type ChatRequest struct {
 	SessionID string `json:"session_id"`
 	Content   string `json:"content" binding:"required"`

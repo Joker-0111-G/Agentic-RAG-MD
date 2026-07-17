@@ -14,6 +14,8 @@ redis:
   pool_size: 10
 
 llm:
-  api_key: "sk-your-deepseek-api-key"          # 你的 DeepSeek API Key
-  model: "deepseek-chat"                       # 模型：deepseek-chat / deepseek-reasoner
-  base_url: "https://api.deepseek.com/v1"      # DeepSeek API 地址
+
+  # DeepSeek
+  api_key: "sk-2fcda97a277d40c59b7f16b281b98966"
+  model: "deepseek-chat"
+  base_url: "https://api.deepseek.com/anthropic"

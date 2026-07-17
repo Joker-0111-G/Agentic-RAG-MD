@@ -32,6 +32,7 @@ func SetupRouter() *gin.Engine {
 			chatGroup.POST("/message", handlers.ChatMessageHandler)
 			chatGroup.GET("/sessions", handlers.ListSessionsHandler)
 			chatGroup.GET("/sessions/:session_id/history", handlers.GetSessionHistoryHandler)
+			chatGroup.DELETE("/sessions/:session_id", handlers.DeleteSessionHandler)
 		}
 
 		docGroup := apiV1.Group("/documents")
@@ -51,4 +52,13 @@ func SetupRouter() *gin.Engine {
 // embedFrontend 将 frontend/ 目录作为 Gin 的静态文件服务
 func embedFrontend(r *gin.Engine) {
 	r.StaticFile("/", "frontend/index.html")
+	// SPA fallback: 前端路由请求都返回 index.html
+	r.NoRoute(func(c *gin.Context) {
+		if c.Request.Method == "GET" && len(c.Request.URL.Path) > 0 && c.Request.URL.Path[0] == '/' &&
+			(len(c.Request.URL.Path) < 4 || c.Request.URL.Path[:4] != "/api") {
+			c.File("frontend/index.html")
+			return
+		}
+		c.Next()
+	})
 }
