@@ -14,5 +14,6 @@ redis:
   pool_size: 10
 
 llm:
-  api_key: "sk-your-llm-api-key"
-  model: "gpt-4o"
+  api_key: "sk-your-deepseek-api-key"          # 你的 DeepSeek API Key
+  model: "deepseek-chat"                       # 模型：deepseek-chat / deepseek-reasoner
+  base_url: "https://api.deepseek.com/v1"      # DeepSeek API 地址

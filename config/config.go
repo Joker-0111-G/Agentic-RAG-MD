@@ -19,8 +19,9 @@ type Redis struct {
 }
 
 type LLM struct {
-	APIKey string `yaml:"api_key"`
-	Model  string `yaml:"model"`
+	APIKey  string `yaml:"api_key"`
+	Model   string `yaml:"model"`
+	BaseURL string `yaml:"base_url"`
 }
 
 type AppConfig struct {

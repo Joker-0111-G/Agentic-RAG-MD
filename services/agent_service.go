@@ -21,7 +21,7 @@ func RunAgentLoop(sessionID string, userContent string, streamChan chan<- Stream
 	defer close(streamChan)
 	ctx := context.Background()
 
-	llm := NewLLMClient(global.Config.LLM.APIKey)
+	llm := NewLLMClient(global.Config.LLM.APIKey, global.Config.LLM.BaseURL, global.Config.LLM.Model)
 
 	messages := []openai.ChatCompletionMessage{
 		{
